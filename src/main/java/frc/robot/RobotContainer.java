@@ -15,7 +15,6 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 import static frc.robot.subsystems.vision.VisionConstants.*;
-import static frc.robot.subsystems.vision.VisionConstants.robotToCamera1;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -30,7 +29,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.drive.*;
-import frc.robot.subsystems.vision.*;
+import frc.robot.subsystems.vision.*; // not using vision for now
 import org.ironmaple.simulation.SimulatedArena;
 import org.ironmaple.simulation.drivesims.SwerveDriveSimulation;
 import org.ironmaple.simulation.seasonspecific.reefscape2025.ReefscapeCoralOnFly;
@@ -44,7 +43,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
  */
 public class RobotContainer {
     // Subsystems
-    private final Vision vision;
+    // private final Vision vision;  //not using vision for now
     private final Drive drive;
     private SwerveDriveSimulation driveSimulation = null;
 
@@ -66,10 +65,10 @@ public class RobotContainer {
                         new ModuleIOTalonFX(TunerConstants.BackLeft),
                         new ModuleIOTalonFX(TunerConstants.BackRight),
                         (robotPose) -> {});
-                vision = new Vision(
-                        drive,
-                        new VisionIOLimelight(VisionConstants.camera0Name, drive::getRotation),
-                        new VisionIOLimelight(VisionConstants.camera1Name, drive::getRotation));
+                // vision = new Vision(
+                //         drive,
+                //         new VisionIOLimelight(VisionConstants.camera0Name, drive::getRotation),
+                //         new VisionIOLimelight(VisionConstants.camera1Name, drive::getRotation));
                 break;
 
             case SIM:
@@ -84,12 +83,12 @@ public class RobotContainer {
                         new ModuleIOSim(driveSimulation.getModules()[3]),
                         driveSimulation::setSimulationWorldPose);
 
-                vision = new Vision(
-                        drive,
-                        new VisionIOPhotonVisionSim(
-                                camera0Name, robotToCamera0, driveSimulation::getSimulatedDriveTrainPose),
-                        new VisionIOPhotonVisionSim(
-                                camera1Name, robotToCamera1, driveSimulation::getSimulatedDriveTrainPose));
+                // vision = new Vision(
+                //         drive,
+                //         new VisionIOPhotonVisionSim(
+                //                 camera0Name, robotToCamera0, driveSimulation::getSimulatedDriveTrainPose),
+                //         new VisionIOPhotonVisionSim(
+                //                 camera1Name, robotToCamera1, driveSimulation::getSimulatedDriveTrainPose));
                 break;
 
             default:
@@ -101,7 +100,7 @@ public class RobotContainer {
                         new ModuleIO() {},
                         new ModuleIO() {},
                         (robotPose) -> {});
-                vision = new Vision(drive, new VisionIO() {}, new VisionIO() {});
+                // vision = new Vision(drive, new VisionIO() {}, new VisionIO() {});
                 break;
         }
 
